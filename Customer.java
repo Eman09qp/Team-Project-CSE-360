@@ -45,7 +45,7 @@ public class Customer extends User {
         return frequent;
     }
 
-    public void setFrequent(boolean isFrequent) {
-        this.frequent = isFrequent;
+    public void setFrequent() {
+        this.frequent = true;
     }
 }
