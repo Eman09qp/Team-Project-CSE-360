@@ -29,6 +29,6 @@ public class Staff extends User {
 
     //Sets the frequent boolean as true in the Customer class
     public void giveCoupon(Customer frequentCustomer){
-        frequentCustomer.isFrequentCustomer();
+        frequentCustomer.setFrequent();
     }
 }
