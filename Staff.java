@@ -1,4 +1,3 @@
-package com.CatJam;
 
 public class Staff extends User {
 
@@ -9,6 +8,7 @@ public class Staff extends User {
                  String staffEmail,
                  String staffUsername,
                  String staffPassword,
+                 int staffApartmentNumber,
                  String newStreet,
                  String newCity,
                  String newState,
@@ -20,17 +20,15 @@ public class Staff extends User {
                 staffEmail,
                 staffUsername,
                 staffPassword,
+                staffApartmentNumber,
                 newStreet,
                 newCity,
                 newState,
                 newZipcode);
     }
 
-    public String toString() {
-        return  "\nUserName:\t\t\t" + userName +
-                "\nStaff member name:\t\t\t" + firstName + " " + lastName +
-                "\nPhone number:\t\t\t" + phoneNumber +
-                "\nEmail:\t\t\t" + email +
-                "\nPassword:\t\t\t" + this.getPassword();
+    //Sets the frequent boolean as true in the Customer class
+    public void giveCoupon(Customer frequentCustomer){
+        frequentCustomer.isFrequentCustomer();
     }
 }
