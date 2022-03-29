@@ -1,36 +1,55 @@
-package com.CatJam;
 
-public class Staff extends User {
+public class Address {
+    private int apartmentNumber = 0;
+    private String street = "";
+    private String city = "";
+    private String state = "";
+    private int zipCode = 0;
 
-    // Staff constructor
-    public Staff(String staffFirstName,
-                 String staffLastName,
-                 String staffPhoneNumber,
-                 String staffEmail,
-                 String staffUsername,
-                 String staffPassword,
-                 String newStreet,
-                 String newCity,
-                 String newState,
-                 int newZipcode)
-    {
-        super(staffFirstName,
-                staffLastName,
-                staffPhoneNumber,
-                staffEmail,
-                staffUsername,
-                staffPassword,
-                newStreet,
-                newCity,
-                newState,
-                newZipcode);
+    public Address(int newApartmentNumber, String newStreet, String newCity, String newState, int newZip){
+        apartmentNumber = newApartmentNumber;
+        street = newStreet;
+        city = newCity;
+        state = newState;
+        zipCode = newZip;
     }
 
-    public String toString() {
-        return  "\nUserName:\t\t\t" + userName +
-                "\nStaff member name:\t\t\t" + firstName + " " + lastName +
-                "\nPhone number:\t\t\t" + phoneNumber +
-                "\nEmail:\t\t\t" + email +
-                "\nPassword:\t\t\t" + this.getPassword();
+    public String getAddress() { return apartmentNumber + " " + street + " " + city + ", " + state + " " + zipCode; }
+
+    // Getters and Setters
+    public String getStreet() {
+        return street;
     }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public int getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public int getApartmentNumber() { return apartmentNumber; }
+
+    public void setApartmentNumber(int apartmentNumber) { this.apartmentNumber = apartmentNumber; }
 }
