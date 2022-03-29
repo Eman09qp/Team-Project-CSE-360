@@ -1,4 +1,3 @@
-package com.CatJam;
 
 public class Food {
     private String foodName = "";
