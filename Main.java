@@ -1,10 +1,18 @@
 
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
 import java.util.LinkedList;
 
-public class Main {
+public class Main extends Application {
 
     public static void main(String[] args) {
-
+        
         Staff Abigail = new Staff("Abigail",
                 "Williams",
                 "480 123 4567",
@@ -44,6 +52,26 @@ public class Main {
         Carlos.cart.add(Hamburger);
         System.out.print("Cart: ");
         Carlos.printCart();
+
+        launch(args);
+    }
+
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Hello World!");
+        Button btn = new Button();
+        btn.setText("Say 'Hello World'");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Hello World!");
+            }
+        });
+
+        StackPane root = new StackPane();
+        root.getChildren().add(btn);
+        primaryStage.setScene(new Scene(root, 300, 250));
+        primaryStage.show();
     }
 }
 
