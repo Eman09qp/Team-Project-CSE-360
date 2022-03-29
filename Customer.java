@@ -1,8 +1,9 @@
-package com.CatJam;
+import java.util.LinkedList;
 
 public class Customer extends User {
 
     private boolean frequent = false;
+    LinkedList<Food> cart = new LinkedList<Food>();
 
     // Customer constructor
     public Customer(String customerFirstName,
@@ -11,7 +12,8 @@ public class Customer extends User {
                     String customerEmail,
                     String customerUserName,
                     String customerPassword,
-                    String newStreet,
+                    int customerApartmentNumber,
+                    String customerStreet,
                     String newCity,
                     String newState,
                     int newZipcode)  {
@@ -22,20 +24,28 @@ public class Customer extends User {
                 customerEmail,
                 customerUserName,
                 customerPassword,
-                newStreet,
+                customerApartmentNumber,
+                customerStreet,
                 newCity,
                 newState,
                 newZipcode);
 
     }
 
-    public String toString() {
-        return  "\nusername:\t\t\t" + userName +
-                "\nCustomer full name:\t\t\t" + firstName + " " + lastName +
-                "\nPhone number:\t\t\t" + phoneNumber +
-                "\nEmail:\t\t\t" + email +
-                "\nPassword:\t\t\t" + this.getPassword();
+    public void printCart(){
+        for(int n = 0; n < cart.size(); n++){
+            if(n == cart.size()-1)
+                System.out.print(cart.get(n).getName());
+            else
+                System.out.print(cart.get(n).getName() + ", ");
+        }
     }
 
+    public boolean isFrequentCustomer() {
+        return frequent;
+    }
 
+    public void setFrequent(boolean isFrequent) {
+        this.frequent = isFrequent;
+    }
 }
