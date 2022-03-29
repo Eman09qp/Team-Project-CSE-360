@@ -1,4 +1,4 @@
-package com.CatJam;
+
 import java.util.LinkedList;
 
 public class Main {
