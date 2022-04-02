@@ -31,7 +31,30 @@ public class Customer extends User {
                 newZipcode);
 
     }
+    
+    //Returns the total price of all items in cart
+    public double getTotal(){
+        double total = 0.0;
+        for(int n = 0; n < cart.size(); n++)
+        {
+            total += cart.get(n).getPrice();
+        }
+        return total;
+    }
 
+    //Returns a string of all the names of the items in the cart
+    public String getCart(){
+        String shoppingList = "";
+        for(int n = 0; n < cart.size(); n++){
+            if(n == cart.size()-1)
+                shoppingList += cart.get(n).getName();
+            else
+                shoppingList += cart.get(n).getName() + ", ";
+
+        }
+        return shoppingList;
+    }
+    
     public void printCart(){
         for(int n = 0; n < cart.size(); n++){
             if(n == cart.size()-1)
