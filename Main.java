@@ -1,8 +1,14 @@
 
 import java.util.LinkedList;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Main {
-
+public class Main extends Application {
+    
+    public void start(Stage primaryStage) {
+        Menu restaurantMenu = new Menu("Borgor Queen");
+    }
+    /*
     public static void main(String[] args) {
 
         Staff Abigail = new Staff("Abigail",
@@ -45,5 +51,6 @@ public class Main {
         System.out.print("Cart: ");
         Carlos.printCart();
     }
+    */
 }
 
