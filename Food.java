@@ -45,4 +45,11 @@ public class Food {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public String toString() {
+        return  "\nFood Name:\t\t\t" + foodName +
+                "\nFood Type\t\t\t" + foodType +
+                "\nIngredients:\t\t\t" + ingredients +
+                "\nPrice:\t\t\t" + price;
+    }
 }

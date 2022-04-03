@@ -24,5 +24,8 @@ public class Menu {
         return menu.get(search);
     }
 
+    public HashMap<String, Food> getMenu() {
+        return menu;
+    }
 }
 

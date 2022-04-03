@@ -1,20 +1,19 @@
 
 public class Address {
-    private int apartmentNumber = 0;
     private String street = "";
     private String city = "";
     private String state = "";
     private int zipCode = 0;
 
-    public Address(int newApartmentNumber, String newStreet, String newCity, String newState, int newZip){
-        apartmentNumber = newApartmentNumber;
+    public Address(String newStreet, String newCity, String newState, int newZip){
+        //apartmentNumber = newApartmentNumber;
         street = newStreet;
         city = newCity;
         state = newState;
         zipCode = newZip;
     }
 
-    public String getAddress() { return apartmentNumber + " " + street + " " + city + ", " + state + " " + zipCode; }
+    public String getAddress() { return street + ", " + city + ", " + state + " " + zipCode; }
 
     // Getters and Setters
     public String getStreet() {
@@ -49,7 +48,7 @@ public class Address {
         this.zipCode = zipCode;
     }
 
-    public int getApartmentNumber() { return apartmentNumber; }
+    //public int getApartmentNumber() { return apartmentNumber; }
 
-    public void setApartmentNumber(int apartmentNumber) { this.apartmentNumber = apartmentNumber; }
+    //public void setApartmentNumber(int apartmentNumber) { this.apartmentNumber = apartmentNumber; }
 }

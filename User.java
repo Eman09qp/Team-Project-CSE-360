@@ -1,5 +1,5 @@
 
-public abstract class User {
+public class User {
 
     protected String firstName = "";
     protected String lastName = "";
@@ -16,7 +16,7 @@ public abstract class User {
                  String newEmail,
                  String newUserName,
                  String newPassword,
-                 int newApartmentNumber,
+                 //int newApartmentNumber,
                  String newStreet,
                  String newCity,
                  String newState,
@@ -28,7 +28,7 @@ public abstract class User {
         email = newEmail;
         userName = newUserName;
         password = newPassword;
-        userAddress = new Address(newApartmentNumber, newStreet, newCity, newState, newZipcode);
+        userAddress = new Address(newStreet, newCity, newState, newZipcode);
     }
 
 
@@ -84,6 +84,10 @@ public abstract class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Address getUserAddress() {
+        return userAddress;
     }
 
 }
