@@ -1,3 +1,4 @@
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -7,18 +8,12 @@ import java.util.ArrayList;
 public class Main extends Application {
     static ArrayList<User> userList = new ArrayList<>();
     static Menu menu = new Menu();
-
-    public void start(Stage primaryStage) {
-
-        Menu restaurantMenu = new Menu("Wàn mín Takeout");
-        createAccount promptCreateAccount = new createAccount();
-    }
-
     public static void main(String[] args) {
         String userFile = "Users.dat";
         String menuFile = "Menu.dat";
 
         //READ Users.dat
+
         readUsers(userFile);
 
         System.out.println("USERS:");
@@ -29,8 +24,6 @@ public class Main extends Application {
         //READ Menu.dat
         readMenu(menuFile);
 
-        //System.out.println("FOOD: " + menu.getMenu().get("Goulash").getName());
-
         System.out.println("\nMENU:");
         for (Food i : menu.getMenu().values()) {
             System.out.println(i.toString());
@@ -38,13 +31,16 @@ public class Main extends Application {
 
         launch(args);
 
-
-
         // SAVE USERS INTO Users.dat
         saveUsers(userFile);
 
         // SAVE MENU INTO Menu.dat
         saveMenu(menuFile);
+    }
+
+    public void start(Stage primaryStage) {
+        Menu restaurantMenu = new Menu("Wàn mín Takeout");
+        createAccount promptCreateAccount = new createAccount();
     }
 
     public static void readUsers(String filename) {
@@ -63,6 +59,10 @@ public class Main extends Application {
             String email = "";
             String password = "";
             int i = 0;
+            String cardName = "";
+            String cardNum = "";
+            String cardExp = "";
+            int cardCode = 0;
 
             String line = bf.readLine();
 
@@ -101,16 +101,28 @@ public class Main extends Application {
                     case 5:
                         password = line;
                         break;
+                    case 6:
+                        cardName = line;
+                        break;
+                    case 7:
+                        cardNum = line;
+                        break;
+                    case 8:
+                        cardExp = line;
+                        break;
+                    case 9:
+                        cardCode = Integer.parseInt(line);
+                        break;
                 }
                 i++;
                 if (line.compareTo("---") == 0) {
                     if (userType.compareTo("Staff") == 0) {
-                        Staff staff = new Staff(firstName, lastName, phone, email, username, password, street, city, state, zip);
+                        Staff staff = new Staff(firstName, lastName, phone, email, username, password, street, city, state, zip, cardName, cardNum, cardExp, cardCode);
                         userList.add(staff);
                     }
 
                     else if (userType.compareTo("Customer") == 0) {
-                        Customer customer = new Customer(firstName, lastName, phone, email, username, password, street, city, state, zip);
+                        Customer customer = new Customer(firstName, lastName, phone, email, username, password, street, city, state, zip, cardName, cardNum, cardExp, cardCode);
                         userList.add(customer);
                     }
                     i = 0;
@@ -125,6 +137,10 @@ public class Main extends Application {
                     zip = 0;
                     email = "";
                     password = "";
+                    cardName = "";
+                    cardNum = "";
+                    cardExp = "";
+                    cardCode = 0;
                 }
                 line = bf.readLine();
             }
@@ -144,12 +160,14 @@ public class Main extends Application {
             PrintWriter pw = new PrintWriter (bw);
 
             for (int i = 0; i < userList.size(); i++) {
-                pw.println(userList.get(i).getClass().toString().replace("class ", "")+ " " + userList.get(i).getUserName());
+                String userType = userList.get(i).getClass().toString().replace("class ", "");
+                pw.println(userType + " " + userList.get(i).getUserName());
                 pw.println(userList.get(i).getFullName());
                 pw.println(userList.get(i).getPhoneNumber());
                 pw.println(userList.get(i).getUserAddress().getAddress());
                 pw.println(userList.get(i).getEmail());
                 pw.println(userList.get(i).getPassword());
+                pw.println(userList.get(i).getPayment().getPayment());
                 pw.println("---");
             }
 
