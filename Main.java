@@ -37,18 +37,17 @@ public class Main extends Application {
         }
 
         // TESTING STUFF
-        /*
-        Staff Abigail = new Staff("Abigail",
+
+        /*Staff Abigail = new Staff("Abigail",
                 "Williams",
                 "480 123 4567",
                 "abigail123@hotmail.com",
                 "abyWill",
                 "securePassword123",
-                1234,
-                "Rural road",
+                "1234 Rural road",
                 "Tempe",
                 "Arizona",
-                879100);
+                879100, "ABIGAIL D WILLIAMS", "1234 5678 9012 3456", "03/22", 123);
 
         Customer Carlos = new Customer("Carlos",
                 "Perez",
@@ -121,6 +120,10 @@ public class Main extends Application {
             String email = "";
             String password = "";
             int i = 0;
+            String cardName = "";
+            String cardNum = "";
+            String cardExp = "";
+            int cardCode = 0;
 
             String line = bf.readLine();
 
@@ -159,16 +162,28 @@ public class Main extends Application {
                     case 5:
                         password = line;
                         break;
+                    case 6:
+                        cardName = line;
+                        break;
+                    case 7:
+                        cardNum = line;
+                        break;
+                    case 8:
+                        cardExp = line;
+                        break;
+                    case 9:
+                        cardCode = Integer.parseInt(line);
+                        break;
                 }
                 i++;
                 if (line.compareTo("---") == 0) {
                     if (userType.compareTo("Staff") == 0) {
-                        Staff staff = new Staff(firstName, lastName, phone, email, username, password, street, city, state, zip);
+                        Staff staff = new Staff(firstName, lastName, phone, email, username, password, street, city, state, zip, cardName, cardNum, cardExp, cardCode);
                         userList.add(staff);
                     }
 
                     else if (userType.compareTo("Customer") == 0) {
-                        Customer customer = new Customer(firstName, lastName, phone, email, username, password, street, city, state, zip);
+                        Customer customer = new Customer(firstName, lastName, phone, email, username, password, street, city, state, zip, cardName, cardNum, cardExp, cardCode);
                         userList.add(customer);
                     }
                     i = 0;
@@ -183,6 +198,10 @@ public class Main extends Application {
                     zip = 0;
                     email = "";
                     password = "";
+                    cardName = "";
+                    cardNum = "";
+                    cardExp = "";
+                    cardCode = 0;
                 }
                 line = bf.readLine();
             }
@@ -202,12 +221,14 @@ public class Main extends Application {
             PrintWriter pw = new PrintWriter (bw);
 
             for (int i = 0; i < userList.size(); i++) {
-                pw.println(userList.get(i).getClass().toString().replace("class ", "")+ " " + userList.get(i).getUserName());
+                String userType = userList.get(i).getClass().toString().replace("class ", "");
+                pw.println(userType + " " + userList.get(i).getUserName());
                 pw.println(userList.get(i).getFullName());
                 pw.println(userList.get(i).getPhoneNumber());
                 pw.println(userList.get(i).getUserAddress().getAddress());
                 pw.println(userList.get(i).getEmail());
                 pw.println(userList.get(i).getPassword());
+                pw.println(userList.get(i).getPayment().getPayment());
                 pw.println("---");
             }
 

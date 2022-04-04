@@ -12,7 +12,7 @@ public class Staff extends User {
                  String newStreet,
                  String newCity,
                  String newState,
-                 int newZipcode)
+                 int newZipcode, String payName, String payNum, String payDate, int payCode)
     {
         super(staffFirstName,
                 staffLastName,
@@ -24,7 +24,7 @@ public class Staff extends User {
                 newStreet,
                 newCity,
                 newState,
-                newZipcode);
+                newZipcode, payName, payNum, payDate, payCode);
     }
 
     //Sets the frequent boolean as true in the Customer class

@@ -8,6 +8,7 @@ public class User {
     protected String userName = "";
     private String password = "";
     Address userAddress;
+    Payment payment;
 
     // Abstract constructor //
     public User (String newFirstName,
@@ -20,7 +21,7 @@ public class User {
                  String newStreet,
                  String newCity,
                  String newState,
-                 int newZipcode)
+                 int newZipcode, String payName, String payNum, String payDate, int payCode)
     {
         firstName = newFirstName;
         lastName = newLastName;
@@ -29,6 +30,7 @@ public class User {
         userName = newUserName;
         password = newPassword;
         userAddress = new Address(newStreet, newCity, newState, newZipcode);
+        payment = new Payment(payName, payNum, payDate, payCode);
     }
 
 
@@ -38,7 +40,8 @@ public class User {
                 "\nPhone number:\t\t\t" + phoneNumber +
                 "\nAddress:\t\t\t" + userAddress.getAddress() +
                 "\nEmail:\t\t\t" + email +
-                "\nPassword:\t\t\t" + this.getPassword();
+                "\nPassword:\t\t\t" + this.getPassword() +
+                "\nPayment info:\n" + payment.getPayment();
     }
 
     // Getter and Setter methods
@@ -88,6 +91,10 @@ public class User {
 
     public Address getUserAddress() {
         return userAddress;
+    }
+
+    public Payment getPayment() {
+        return payment;
     }
 
 }

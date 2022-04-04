@@ -3,6 +3,7 @@ import java.util.LinkedList;
 public class Customer extends User {
 
     private boolean frequent = false;
+
     LinkedList<Food> cart = new LinkedList<Food>();
 
     // Customer constructor
@@ -16,7 +17,7 @@ public class Customer extends User {
                     String customerStreet,
                     String newCity,
                     String newState,
-                    int newZipcode)  {
+                    int newZipcode, String payName, String payNum, String payDate, int payCode)  {
 
         super(customerFirstName,
                 customerLastName,
@@ -28,8 +29,7 @@ public class Customer extends User {
                 customerStreet,
                 newCity,
                 newState,
-                newZipcode);
-
+                newZipcode, payName, payNum, payDate, payCode);
     }
     
     //Returns the total price of all items in cart
