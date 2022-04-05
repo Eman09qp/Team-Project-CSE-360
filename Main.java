@@ -25,8 +25,8 @@ public class Main extends Application {
         readMenu(menuFile);
 
         System.out.println("\nMENU:");
-        for (Food i : menu.getMenu().values()) {
-            System.out.println(i.toString());
+         for (int i = 0; i < menu.menuSize(); i++) {
+            System.out.println(menu.getFood(i).toString());
         }
 
         launch(args);
@@ -39,7 +39,7 @@ public class Main extends Application {
     }
 
     public void start(Stage primaryStage) {
-        Menu restaurantMenu = new Menu("Wàn mín Takeout");
+        Menu restaurantMenu = new Menu("Wàn mín Takeout", menu);
         createAccount promptCreateAccount = new createAccount();
     }
 
@@ -233,11 +233,11 @@ public class Main extends Application {
             BufferedWriter bw = new BufferedWriter (fw);
             PrintWriter pw = new PrintWriter (bw);
 
-            for (Food i : menu.getMenu().values()) {
-                pw.println(i.getName());
-                pw.println(i.getFoodType());
-                pw.println(i.getIngredients());
-                pw.println(i.getPrice());
+            for (int i = 0; i < menu.menuSize(); i ++) {
+                pw.println(menu.getFood(i).getName());
+                pw.println(menu.getFood(i).getFoodType());
+                pw.println(menu.getFood(i).getIngredients());
+                pw.println(menu.getFood(i).getPrice());
                 pw.println("---");
             }
 

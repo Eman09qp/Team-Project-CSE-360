@@ -3,24 +3,25 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Menu extends Stage {
-    private HashMap<String, Food> menu;
+    private ArrayList<Food> menu;
 
     // pane holds the toolBar and the food items
     GridPane pane = new GridPane();
+    ScrollPane scrollPane = new ScrollPane();
+
+    ArrayList<VBox> display = new ArrayList<VBox>();
+
+
     HBox toolBar = new HBox();
-    HBox Goulash= new HBox();
-    HBox descr = new HBox();
-    HBox goldenCrab = new HBox();
-    HBox tripleLayeredConsomme = new HBox();
-    HBox moonPie = new HBox();
-    HBox tianshuMeat = new HBox();
     HBox holdCheckButton = new HBox();
 
     // Create all necessary nodes
@@ -32,7 +33,37 @@ public class Menu extends Stage {
     Button checkOut = new Button("Check out");
 
     //Overloaded Constructor
-    public Menu(String newRestaurantName){
+    public Menu(String newRestaurantName, Menu saved){
+        menu  = new ArrayList<Food>();
+        for (int i = 0; i < saved.menuSize(); i++) {
+            menu.add(saved.getFood(i));
+        }
+
+            for (int i = 0; i < menu.size(); i++) {
+                System.out.println("Test");
+                String name = menu.get(i).getName();
+                Food newFood = menu.get(i);
+                HBox tempBox = new HBox();
+                VBox tempBox2 = new VBox();
+                tempBox.setAlignment(Pos.CENTER_RIGHT);
+                tempBox.setPadding(new Insets(10, 50, 10, 10));
+                tempBox.setSpacing(10);
+                TextField enterNum = new TextField();
+                enterNum.setMaxWidth(30);
+
+                tempBox.getChildren().addAll(new Label("[Food Image]"),
+                        new Label(name),
+                        enterNum,
+                        new Button("Add"),
+                        new Button("Delete"));
+                Label ingredients = new Label("Ingredients: " + newFood.getIngredients() + "   Price: $" + String.format("%.2f",newFood.getPrice()));
+                tempBox2.getChildren().addAll(tempBox, ingredients);
+                ingredients.setPadding(new Insets(0, 50, 20, 50));
+
+                display.add(tempBox2);
+
+            }
+
         holdCheckButton.setAlignment(Pos.BASELINE_RIGHT);
         holdCheckButton.getChildren().add(checkOut);
         holdCheckButton.setPadding(new Insets(25,50,25,0));
@@ -41,110 +72,47 @@ public class Menu extends Stage {
         toolBar.setPadding(new Insets(10,50,10,10));
         toolBar.setSpacing(10);
 
-        Goulash.setAlignment(Pos.CENTER_RIGHT); //the GridPane will be in center of the scene
-        Goulash.setPadding(new Insets(10, 50, 10, 10));
-        Goulash.setSpacing(10);
-        TextField enterNum = new TextField();
-        enterNum.setMaxWidth(30);
-
-        goldenCrab.setAlignment(Pos.CENTER_RIGHT); //the GridPane will be in center of the scene
-        goldenCrab.setPadding(new Insets(10, 50, 10, 10));
-        goldenCrab.setSpacing(10);
-        TextField enterNum1 = new TextField();
-        enterNum1.setMaxWidth(30);
-
-        tripleLayeredConsomme.setAlignment(Pos.CENTER_RIGHT); //the GridPane will be in center of the scene
-        tripleLayeredConsomme.setPadding(new Insets(10, 50, 10, 10));
-        tripleLayeredConsomme.setSpacing(10);
-        TextField enterNum2 = new TextField();
-        enterNum2.setMaxWidth(30);
-
-        moonPie.setAlignment(Pos.CENTER_RIGHT); //the GridPane will be in center of the scene
-        moonPie.setPadding(new Insets(10, 50, 10, 10));
-        moonPie.setSpacing(10);
-        TextField enterNum3 = new TextField();
-        enterNum3.setMaxWidth(30);
-
-        tianshuMeat.setAlignment(Pos.CENTER_RIGHT); //the GridPane will be in center of the scene
-        tianshuMeat.setPadding(new Insets(10, 50, 10, 10));
-        tianshuMeat.setSpacing(10);
-        TextField enterNum4 = new TextField();
-        enterNum4.setMaxWidth(30);
-
         toolBar.getChildren().addAll(restaurantName, search, searchBar, createAccount, login);
 
-
-        Goulash.getChildren().addAll(new Label("[Food Image]"),
-                new Label("Goulash"),
-                enterNum,
-                new Button("Add"),
-                new Button("Delete"));
-        Label ingredients = new Label("Ingredients: Chilled meat, Carrot, Tomato    Price: $4.59");
-
-        goldenCrab.getChildren().addAll(new Label("[Food Image]"),
-                new Label("Golden Crab"),
-                enterNum1,
-                new Button("Add"),
-                new Button("Delete"));
-        Label ingr1 = new Label("Ingredients: Bird Egg, Flour, Crab, Salt   Price: $20.90");
-
-        tripleLayeredConsomme.getChildren().addAll(new Label("[Food Image]"),
-                new Label("Triple-Layered Consomme"),
-                enterNum2,
-                new Button("Add"),
-                new Button("Delete"));
-        Label ingr2 = new Label("Ingredients: Ham, Fowl, Bamboo shoot, Mushroom     Price: $12.90");
-
-        moonPie.getChildren().addAll(new Label("[Food Image]"),
-                new Label(" Moon Pie"),
-                enterNum3,
-                new Button("Add"),
-                new Button("Delete"));
-        Label ingr3 = new Label("Ingredients: Raw meat, Bird egg, butter, small lamp grass      Price: $5.99");
-
-        tianshuMeat.getChildren().addAll(new Label("[Food Image]"),
-                new Label("Tianshu Meat"),
-                enterNum4,
-                new Button("Add"),
-                new Button("Delete"));
-        Label ingr4 = new Label("Ingredients: Raw meat, Sugar, Qingxin, Matsutake       Price: $7.80");
-
-        ingredients.setPadding(new Insets(0, 50, 20, 50));
-        ingr1.setPadding(new Insets(0, 50, 20, 50));
-        ingr2.setPadding(new Insets(0, 50, 20, 50));
-        ingr3.setPadding(new Insets(0, 50, 20, 50));
-        ingr4.setPadding(new Insets(0, 50, 20, 50));
-
         // Setup the layout of pane, toolBar and Menu
+        int i = 0;
         pane.add(toolBar, 0 , 0);
-        pane.add(Goulash, 0, 1);
-        pane.add(ingredients, 0, 2);
-        pane.add(goldenCrab, 0, 3);
-        pane.add(ingr1, 0, 4);
-        pane.add(tripleLayeredConsomme, 0, 5);
-        pane.add(ingr2, 0, 6);
-        pane.add(moonPie, 0, 7);
-        pane.add(ingr3, 0, 8);
-        pane.add(tianshuMeat, 0 , 9);
-        pane.add(ingr4, 0 ,10);
-        pane.add(holdCheckButton,0,11);
+        i++;
+
+        while (i <= menu.size()) {
+            pane.add(display.get(i - 1), 0, i);
+            i++;
+        }
+        pane.add(holdCheckButton,0,i);
+
+        scrollPane.setContent(pane);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
         this.setTitle(newRestaurantName);
-        this.setScene(new Scene(pane)); // Place the scene in the stage
+        this.setScene(new Scene(scrollPane)); // Place the scene in the stage
 
         this.show(); // Display the stage*/
+        System.out.println(menuSize());
     }
 
 
     public Menu() {
-        menu  = new HashMap<String, Food>();
+        menu  = new ArrayList<Food>();
     }
 
     public void addToMenu (Food newFood) {
-        menu.put(newFood.getName(), newFood);
+        menu.add(newFood);
     }
 
-    public void removeFromMenu(String rm) {
+    public int menuSize () {
+        return menu.size();
+    }
+
+    public Food getFood (int i) {
+        return menu.get(i);
+    }
+
+   /* public void removeFromMenu(String rm) {
         try {
             menu.remove(rm);
 
@@ -159,6 +127,6 @@ public class Menu extends Stage {
 
     public HashMap<String, Food> getMenu() {
         return menu;
-    }
+    } */
 }
 
