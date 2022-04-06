@@ -1,10 +1,10 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class Customer extends User {
 
     private boolean frequent = false;
 
-    LinkedList<Food> cart = new LinkedList<Food>();
+    ArrayList<Food> cart = new ArrayList<Food>();
 
     // Customer constructor
     public Customer(String customerFirstName,
@@ -62,6 +62,10 @@ public class Customer extends User {
             else
                 System.out.print(cart.get(n).getName() + ", ");
         }
+    }
+
+    public void addCart(Food newFood) {
+        cart.add(newFood);
     }
 
     public boolean isFrequentCustomer() {
