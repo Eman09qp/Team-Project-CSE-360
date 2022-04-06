@@ -64,7 +64,7 @@ public class User {
         if (!(newCoupon.getDiscount() > total)) {
             total = total - this.getCoupon().getDiscount();
         }
-        return Math.round(total*100.0)/100.0;
+        return total;
     }
 
 
