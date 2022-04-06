@@ -1,3 +1,6 @@
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,7 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class createAccount extends Stage{
+public class CreateAccount extends Stage{
     GridPane pane = new GridPane();
 
 
@@ -22,13 +25,26 @@ public class createAccount extends Stage{
     HBox nameOnCardField = new HBox();
     HBox secCodeTitle = new HBox();
     HBox secCodeField = new HBox();
-
+    TextField username = new TextField();
+    TextField firstname = new TextField();
+    TextField lastname = new TextField();
+    TextField addressText = new TextField();
+    TextField cityText = new TextField();
+    TextField stateText = new TextField();
+    TextField zipcodeText = new TextField();
+    TextField passwordText = new TextField();
+    TextField cardName = new TextField();
+    TextField cardNumber = new TextField();
+    TextField expiration = new TextField();
+    TextField securityCode = new TextField();
+    TextField emailText = new TextField();
+    TextField numberText = new TextField();
 
 
     HBox passwordBoxTitle = new HBox();
     HBox passwordBoxField = new HBox();
 
-    public createAccount(){
+    public CreateAccount(){
         pane.setPadding(new Insets(20,50,50,50));
 
         Label userName = new Label("User Name");
@@ -42,7 +58,7 @@ public class createAccount extends Stage{
         userNameBoxField.setAlignment(Pos.TOP_CENTER);
         userNameBoxField.setPadding(new Insets(10, 50, 10, 50));
         userNameBoxField.setSpacing(10);
-        userNameBoxField.getChildren().addAll(new TextField(), new TextField(), new TextField());
+        userNameBoxField.getChildren().addAll(username, firstname, lastname);
 
         Label email = new Label("Email");
         Label mobile = new Label("Mobile Number");
@@ -54,20 +70,23 @@ public class createAccount extends Stage{
         emailBoxField.setAlignment(Pos.CENTER_LEFT);
         emailBoxField.setPadding(new Insets(10, 50, 10, 50));
         emailBoxField.setSpacing(10);
-        emailBoxField.getChildren().addAll(new TextField(), new TextField());
+        emailBoxField.getChildren().addAll(emailText, numberText);
 
 
-        Label address = new Label("Complete Address");
+        Label address = new Label("Address");
+        Label city = new Label("City");
+        Label state = new Label("State");
+        Label zipcode = new Label("ZIP Code");
         address.setPadding(new Insets(10,0,0,0));
 
         addressBoxTitle.setAlignment(Pos.CENTER_LEFT);
         addressBoxTitle.setPadding(new Insets(0, 50, 0, 50));
         addressBoxTitle.setSpacing(100);
-        addressBoxTitle.getChildren().addAll(address);
+        addressBoxTitle.getChildren().addAll(address, city, state, zipcode);
         addressBoxField.setAlignment(Pos.CENTER_LEFT);
         addressBoxField.setPadding(new Insets(10, 50, 10, 50));
         addressBoxField.setSpacing(10);
-        addressBoxField.getChildren().addAll(new TextField());
+        addressBoxField.getChildren().addAll(addressText, cityText, stateText, zipcodeText);
 
         Label password = new Label("Password");
         password.setPadding(new Insets(10,0,0,0));
@@ -79,7 +98,7 @@ public class createAccount extends Stage{
         passwordBoxField.setAlignment(Pos.CENTER_LEFT);
         passwordBoxField.setPadding(new Insets(10, 50, 10, 50));
         passwordBoxField.setSpacing(10);
-        passwordBoxField.getChildren().addAll(new TextField());
+        passwordBoxField.getChildren().addAll(passwordText);
 
         Label nameOnCard = new Label("Name on card");
         Label cardNum = new Label("Card Number");
@@ -92,7 +111,7 @@ public class createAccount extends Stage{
         nameOnCardField.setAlignment(Pos.CENTER_LEFT);
         nameOnCardField.setPadding(new Insets(10, 50, 10, 50));
         nameOnCardField.setSpacing(10);
-        nameOnCardField.getChildren().addAll(new TextField(), new TextField(), new TextField());
+        nameOnCardField.getChildren().addAll(cardName, cardNumber, expiration);
 
         Label secCode = new Label("Security Code");
         secCodeTitle.setAlignment(Pos.CENTER_LEFT);
@@ -102,7 +121,7 @@ public class createAccount extends Stage{
         secCodeField.setAlignment(Pos.CENTER_LEFT);
         secCodeField.setPadding(new Insets(10, 50, 10, 50));
         secCodeField.setSpacing(10);
-        secCodeField.getChildren().addAll(new TextField());
+        secCodeField.getChildren().addAll(securityCode);
 
         HBox createAccBox = new HBox();
         createAccBox.setAlignment(Pos.CENTER_RIGHT);
@@ -128,8 +147,32 @@ public class createAccount extends Stage{
         pane.add(passwordBoxField,0,11);
         pane.add(createAccBox, 0,12);
 
+        createAcc.setOnAction(new AccountHandler());
+
         this.setTitle("Create Account");
         this.setScene(new Scene(pane));
         this.show();
+    }
+
+    private class AccountHandler implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
+            Customer customer = new Customer(firstname.getText(),
+                    lastname.getText(),
+                    numberText.getText(),
+                    emailText.getText(),
+                    username.getText(),
+                    passwordText.getText(),
+                    addressText.getText(),
+                    cityText.getText(),
+                    stateText.getText(),
+                    Integer.parseInt(zipcodeText.getText()),
+                    cardName.getText(),
+                    cardNumber.getText(),
+                    expiration.getText(),
+                    Integer.parseInt(securityCode.getText()));
+            Main.menu.setCustomer(customer);
+            Main.userList.add(customer);
+            hide();
+        }
     }
 }

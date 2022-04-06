@@ -13,21 +13,10 @@ public class Main extends Application {
         String menuFile = "Menu.dat";
 
         //READ Users.dat
-
         readUsers(userFile);
-
-        System.out.println("USERS:");
-        for (int i = 0; i < userList.size(); i++) {
-            System.out.println(userList.get(i).toString());
-        }
 
         //READ Menu.dat
         readMenu(menuFile);
-
-        System.out.println("\nMENU:");
-         for (int i = 0; i < menu.menuSize(); i++) {
-            System.out.println(menu.getFood(i).toString());
-        }
 
         launch(args);
 
@@ -40,7 +29,7 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) {
         Menu restaurantMenu = new Menu("Wàn mín Takeout", menu);
-        createAccount promptCreateAccount = new createAccount();
+        //createAccount promptCreateAccount = new createAccount();
     }
 
     public static void readUsers(String filename) {

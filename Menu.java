@@ -1,3 +1,5 @@
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 
 public class Menu extends Stage {
     private ArrayList<Food> menu;
+    private Customer customer;
 
     // pane holds the toolBar and the food items
     GridPane pane = new GridPane();
@@ -40,7 +43,6 @@ public class Menu extends Stage {
         }
 
             for (int i = 0; i < menu.size(); i++) {
-                System.out.println("Test");
                 String name = menu.get(i).getName();
                 Food newFood = menu.get(i);
                 HBox tempBox = new HBox();
@@ -50,17 +52,22 @@ public class Menu extends Stage {
                 tempBox.setSpacing(10);
                 TextField enterNum = new TextField();
                 enterNum.setMaxWidth(30);
+                Button add = new Button("Add");
+                Button delete = new Button("Delete");
 
                 tempBox.getChildren().addAll(new Label("[Food Image]"),
                         new Label(name),
                         enterNum,
-                        new Button("Add"),
-                        new Button("Delete"));
+                        add,
+                        delete);
                 Label ingredients = new Label("Ingredients: " + newFood.getIngredients() + "   Price: $" + String.format("%.2f",newFood.getPrice()));
                 tempBox2.getChildren().addAll(tempBox, ingredients);
                 ingredients.setPadding(new Insets(0, 50, 20, 50));
 
                 display.add(tempBox2);
+
+                add.setOnAction(new AddHandler());
+                delete.setOnAction(new DeleteHandler());
 
             }
 
@@ -88,13 +95,42 @@ public class Menu extends Stage {
         scrollPane.setContent(pane);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
+        createAccount.setOnAction(new CreateHandler());
+
         this.setTitle(newRestaurantName);
         this.setScene(new Scene(scrollPane)); // Place the scene in the stage
 
         this.show(); // Display the stage*/
-        System.out.println(menuSize());
     }
 
+    private class AddHandler implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
+            Button n = (Button) event.getSource();
+            HBox temp = (HBox) n.getParent();
+            Label food = (Label) temp.getChildren().get(1);
+            String string = food.getText();
+            TextField num = (TextField) temp.getChildren().get(2);
+            int numOfFood = Integer.parseInt(num.getText());
+
+            Food newFood = searchMenu(string);
+
+            for (int i = 0; i < numOfFood; i++) {
+                customer.addCart(newFood);
+            }
+        }
+    }
+
+    private class DeleteHandler implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
+
+        }
+    }
+
+    private class CreateHandler implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
+            CreateAccount newAccount = new CreateAccount();
+        }
+    }
 
     public Menu() {
         menu  = new ArrayList<Food>();
@@ -112,7 +148,7 @@ public class Menu extends Stage {
         return menu.get(i);
     }
 
-   /* public void removeFromMenu(String rm) {
+   public void removeFromMenu(String rm) {
         try {
             menu.remove(rm);
 
@@ -122,11 +158,16 @@ public class Menu extends Stage {
     }
 
     public Food searchMenu(String search) {
-        return menu.get(search);
+        for (int i = 0; i < menu.size(); i++) {
+            if (search.compareToIgnoreCase(menu.get(i).getName()) == 0) {
+                return menu.get(i);
+            }
+        }
+        return null;
     }
 
-    public HashMap<String, Food> getMenu() {
-        return menu;
-    } */
+    public void setCustomer(Customer newCustomer) {
+        customer = newCustomer;
+    }
 }
 
