@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Menu extends Stage {
     private ArrayList<Food> menu;
-    private Customer customer;
+    private Customer customer = new Customer();
 
     // pane holds the toolBar and the food items
     GridPane pane = new GridPane();

@@ -14,6 +14,7 @@ public class User {
     Address userAddress;
     Payment payment;
 
+    public User() {}
     // Abstract constructor //
     public User (String newFirstName,
                  String newLastName,

@@ -6,6 +6,7 @@ public class Customer extends User {
 
     ArrayList<Food> cart = new ArrayList<Food>();
 
+    public Customer() {}
     // Customer constructor
     public Customer(String customerFirstName,
                     String customerLastName,
