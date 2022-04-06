@@ -4,8 +4,6 @@ public class Customer extends User {
 
     private boolean frequent = false;
 
-    ArrayList<Food> cart = new ArrayList<Food>();
-
     public Customer() {}
     // Customer constructor
     public Customer(String customerFirstName,

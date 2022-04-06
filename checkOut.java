@@ -21,6 +21,7 @@ public class checkOut extends Stage {
 
     public checkOut(User newUser){
         double total = newUser.getTotal() - newUser.getCoupon().getDiscount();
+
         pane.setPadding(new Insets(10,20,30,20));
         pane.setAlignment(Pos.CENTER_RIGHT);
         subTotalBox.setSpacing(30);

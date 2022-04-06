@@ -1,10 +1,10 @@
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class User {
 
     coupon newCoupon = new coupon(0);
-    LinkedList<Food> cart = new LinkedList<Food>();
+    protected ArrayList<Food> cart = new ArrayList<Food>();
     protected String firstName = "";
     protected String lastName = "";
     protected String phoneNumber = "";
@@ -51,8 +51,9 @@ public class User {
 
     public double getSubTotal(){
         double subtotal = 0.0;
-        for(int n = 0; n < cart.size(); n++)
+        for (int n = 0; n < cart.size(); n++)
         {
+            System.out.println("success");
             subtotal += cart.get(n).getPrice();
         }
         return subtotal;
@@ -131,7 +132,7 @@ public class User {
         return payment;
     }
 
-    public LinkedList<Food> getMyCart(){
+    public ArrayList<Food> getMyCart(){
         return cart;
     }
 

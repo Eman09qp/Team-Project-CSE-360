@@ -97,6 +97,7 @@ public class Menu extends Stage {
 
         createAccount.setOnAction(new CreateHandler());
         login.setOnAction(new LoginHandler());
+        checkOut.setOnAction(new CheckoutHandler());
 
         this.setTitle(newRestaurantName);
         this.setScene(new Scene(scrollPane)); // Place the scene in the stage
@@ -136,6 +137,12 @@ public class Menu extends Stage {
     private class LoginHandler implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
             Login login = new Login();
+        }
+    }
+
+    private class CheckoutHandler implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
+            checkOut check = new checkOut(customer);
         }
     }
 
