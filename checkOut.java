@@ -46,7 +46,7 @@ public class checkOut extends Stage {
             n++;
         }
 
-        Label subTotal = new Label("SubTotal:   $" + newUser.getSubTotal());
+        Label subTotal = new Label("SubTotal:   $" + String.format("%.2f",newUser.getSubTotal()));
         subTotalBox.getChildren().add(subTotal);
 
         Label coupon = new Label("Coupon: ");
@@ -54,7 +54,7 @@ public class checkOut extends Stage {
         Button apply = new Button("Apply");
         couponBox.getChildren().addAll(coupon, couponField, apply);
 
-        Label tot = new Label("Total:   $" + newUser.getTotal());
+        Label tot = new Label("Total:   $" + String.format("%.2f",newUser.getSubTotal()));
         totalBox.getChildren().add(tot);
 
         Button placeOrder = new Button("Place Order");
@@ -85,7 +85,7 @@ public class checkOut extends Stage {
 
         Label foodName = new Label(item.getName());
         Label ingredients = new Label("Ingredients:     " + item.getIngredients());
-        Label foodPrice = new Label("Price:     $" + String.valueOf(item.getPrice()));
+        Label foodPrice = new Label("Price:     $" + String.format("%.2f",item.getPrice()));
         Button remove = new Button("Remove");
         itemBox.getChildren().addAll(foodName, ingredients, foodPrice, remove);
         return itemBox;

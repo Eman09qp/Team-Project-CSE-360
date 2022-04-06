@@ -53,7 +53,6 @@ public class User {
         double subtotal = 0.0;
         for (int n = 0; n < cart.size(); n++)
         {
-            System.out.println("success");
             subtotal += cart.get(n).getPrice();
         }
         return subtotal;
