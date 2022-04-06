@@ -172,7 +172,7 @@ public class CreateAccount extends Stage{
                     Integer.parseInt(securityCode.getText()));
             Main.menu.setCustomer(customer);
             Main.userList.add(customer);
-            Platform.exit();
+            hide();
         }
     }
 }
