@@ -96,6 +96,7 @@ public class Menu extends Stage {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
         createAccount.setOnAction(new CreateHandler());
+        login.setOnAction(new LoginHandler());
 
         this.setTitle(newRestaurantName);
         this.setScene(new Scene(scrollPane)); // Place the scene in the stage
@@ -129,6 +130,12 @@ public class Menu extends Stage {
     private class CreateHandler implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
             CreateAccount newAccount = new CreateAccount();
+        }
+    }
+
+    private class LoginHandler implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
+            Login login = new Login();
         }
     }
 
