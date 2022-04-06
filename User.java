@@ -60,14 +60,11 @@ public class User {
     }
 
     public double getTotal(){
-        double total = 0.0;
-        if (!(newCoupon.getDiscount() >= total)) {
-            for (int n = 0; n < cart.size(); n++) {
-                total += cart.get(n).getPrice();
-            }
-            total = total - newCoupon.getDiscount();
+        double total = this.getSubTotal();
+        if (!(newCoupon.getDiscount() > total)) {
+            total = total - this.getCoupon().getDiscount();
         }
-        return total;
+        return Math.round(total*100.0)/100.0;
     }
 
 
