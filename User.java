@@ -1,6 +1,10 @@
 
+import java.util.LinkedList;
+
 public class User {
 
+    coupon newCoupon = new coupon(0);
+    LinkedList<Food> cart = new LinkedList<Food>();
     protected String firstName = "";
     protected String lastName = "";
     protected String phoneNumber = "";
@@ -42,6 +46,35 @@ public class User {
                 "\nEmail:\t\t\t" + email +
                 "\nPassword:\t\t\t" + this.getPassword() +
                 "\nPayment info:\n" + payment.getPayment();
+    }
+
+    public double getSubTotal(){
+        double subtotal = 0.0;
+        for(int n = 0; n < cart.size(); n++)
+        {
+            subtotal += cart.get(n).getPrice();
+        }
+        return subtotal;
+    }
+
+    public double getTotal(){
+        double total = 0.0;
+        if (!(newCoupon.getDiscount() >= total)) {
+            for (int n = 0; n < cart.size(); n++) {
+                total += cart.get(n).getPrice();
+            }
+            total = total - newCoupon.getDiscount();
+        }
+        return total;
+    }
+
+
+    public coupon getCoupon(){
+        return newCoupon;
+    }
+
+    public void setCoupon(double discount){
+        newCoupon = new coupon(discount);
     }
 
     // Getter and Setter methods
@@ -97,5 +130,11 @@ public class User {
         return payment;
     }
 
+    public LinkedList<Food> getMyCart(){
+        return cart;
+    }
+
 }
+
+
 
