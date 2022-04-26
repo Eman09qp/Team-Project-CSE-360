@@ -10,6 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Login extends Stage{
@@ -48,6 +49,7 @@ public class Login extends Stage{
         public void handle(ActionEvent event) {
             String username = userField.getText();
             String password = passField.getText();
+            fail.setTextFill(Color.RED);
 
             for (int i = 0; i < Main.userList.size(); i++) {
                 if (username.compareTo(Main.userList.get(i).getUserName()) == 0) {
@@ -55,6 +57,12 @@ public class Login extends Stage{
                         String userType = Main.userList.get(i).getClass().toString().replace("class ", "");
                         if (userType.compareTo("Customer") == 0) {
                             Main.menu.setCustomer((Customer) Main.userList.get(i));
+                            hide();
+                        }
+                        else if (userType.compareTo("Staff") == 0) {
+                            Admin admin = new Admin("**ADMIN MENU**", Main.menu);
+                            admin.setWidth(500);
+                            admin.setHeight(700);
                             hide();
                         }
                     } else {

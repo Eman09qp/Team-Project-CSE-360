@@ -29,6 +29,8 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) {
         Menu restaurantMenu = new Menu("Wàn mín Takeout", menu);
+        restaurantMenu.setWidth(600);
+        restaurantMenu.setHeight(700);
         //createAccount promptCreateAccount = new createAccount();
     }
 
@@ -173,6 +175,7 @@ public class Main extends Application {
             String foodName = "";
             String foodType = "";
             String ingredients = "";
+            String image = "";
             double price = 0.0;
             int i = 0;
 
@@ -193,10 +196,12 @@ public class Main extends Application {
                     case 3:
                         price = Double.parseDouble(line);
                         break;
+                    case 4:
+                        image = line;
                 }
                 i++;
                 if (line.compareTo("---") == 0) {
-                    Food food = new Food(foodName, foodType, ingredients, price);
+                    Food food = new Food(foodName, foodType, ingredients, price, image);
                     menu.addToMenu(food);
 
                     i = 0;
@@ -204,6 +209,7 @@ public class Main extends Application {
                     foodType = "";
                     ingredients = "";
                     price = 0.0;
+                    image = "";
                 }
                 line = bf.readLine();
             }
@@ -227,6 +233,7 @@ public class Main extends Application {
                 pw.println(menu.getFood(i).getFoodType());
                 pw.println(menu.getFood(i).getIngredients());
                 pw.println(menu.getFood(i).getPrice());
+                pw.println(menu.getFood(i).getImage());
                 pw.println("---");
             }
 

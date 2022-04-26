@@ -7,25 +7,29 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class Menu extends Stage {
     private ArrayList<Food> menu;
     private Customer customer = new Customer();
 
+
     // pane holds the toolBar and the food items
     GridPane pane = new GridPane();
     ScrollPane scrollPane = new ScrollPane();
 
-    ArrayList<VBox> display = new ArrayList<VBox>();
+    ArrayList<BorderPane> display = new ArrayList<BorderPane>();
 
 
     HBox toolBar = new HBox();
-    HBox holdCheckButton = new HBox();
+    BorderPane holdCheckButton = new BorderPane();
 
     // Create all necessary nodes
     Label restaurantName = new Label("万民 - Wàn mín Takeout");
@@ -34,6 +38,7 @@ public class Menu extends Stage {
     Button createAccount = new Button("Create Account");
     Button login = new Button("Login");
     Button checkOut = new Button("Check out");
+    Label fail = new Label();
 
     //Overloaded Constructor
     public Menu(String newRestaurantName, Menu saved){
@@ -43,10 +48,13 @@ public class Menu extends Stage {
         }
 
             for (int i = 0; i < menu.size(); i++) {
+                Image image = new Image(menu.get(i).getImage(), 50,50, true, true);
+                ImageView imageView = new ImageView(image);
                 String name = menu.get(i).getName();
                 Food newFood = menu.get(i);
                 HBox tempBox = new HBox();
-                VBox tempBox2 = new VBox();
+                HBox tempBox3 = new HBox();
+                BorderPane tempBox2 = new BorderPane();
                 tempBox.setAlignment(Pos.CENTER_RIGHT);
                 tempBox.setPadding(new Insets(10, 50, 10, 10));
                 tempBox.setSpacing(10);
@@ -55,13 +63,20 @@ public class Menu extends Stage {
                 Button add = new Button("Add");
                 Button delete = new Button("Delete");
 
-                tempBox.getChildren().addAll(new Label("[Food Image]"),
-                        new Label(name),
-                        enterNum,
+                tempBox3.getChildren().addAll(imageView);
+
+                tempBox.getChildren().addAll(new Label(name), enterNum,
                         add,
                         delete);
+
+
                 Label ingredients = new Label("Ingredients: " + newFood.getIngredients() + "   Price: $" + String.format("%.2f",newFood.getPrice()));
-                tempBox2.getChildren().addAll(tempBox, ingredients);
+
+                tempBox2.setLeft(tempBox3);
+                tempBox2.setRight(tempBox);
+                tempBox2.setBottom(ingredients);
+
+                //tempBox2.getChildren().addAll(tempBox, ingredients);
                 ingredients.setPadding(new Insets(0, 50, 20, 50));
 
                 display.add(tempBox2);
@@ -71,9 +86,10 @@ public class Menu extends Stage {
 
             }
 
-        holdCheckButton.setAlignment(Pos.BASELINE_RIGHT);
-        holdCheckButton.getChildren().add(checkOut);
-        holdCheckButton.setPadding(new Insets(25,50,25,0));
+        holdCheckButton.setLeft(fail);
+        holdCheckButton.setRight(checkOut);
+        //holdCheckButton.getChildren().add(checkOut);
+        //holdCheckButton.setPadding(new Insets(25,50,25,0));
         //Set up properties of each pane
         toolBar.setAlignment(Pos.TOP_CENTER);
         toolBar.setPadding(new Insets(10,50,10,10));
@@ -109,10 +125,19 @@ public class Menu extends Stage {
         public void handle(ActionEvent event) {
             Button n = (Button) event.getSource();
             HBox temp = (HBox) n.getParent();
-            Label food = (Label) temp.getChildren().get(1);
+            Label food = (Label) temp.getChildren().get(0);
             String string = food.getText();
-            TextField num = (TextField) temp.getChildren().get(2);
-            int numOfFood = Integer.parseInt(num.getText());
+            TextField num = (TextField) temp.getChildren().get(1);
+            int numOfFood = 0;
+
+            try {
+                numOfFood = Integer.parseInt(num.getText());
+            }
+            catch (NumberFormatException e) {
+                fail.setTextFill(Color.RED);
+                fail.setText("Please input a number");
+
+            }
 
             Food newFood = searchMenu(string);
 
@@ -124,7 +149,14 @@ public class Menu extends Stage {
 
     private class DeleteHandler implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
+            Button n = (Button) event.getSource();
+            HBox temp = (HBox) n.getParent();
+            Label food = (Label) temp.getChildren().get(0);
+            String string = food.getText();
 
+            Food newFood = searchMenu(string);
+
+            customer.removeCart(newFood);
         }
     }
 
@@ -164,7 +196,8 @@ public class Menu extends Stage {
 
    public void removeFromMenu(String rm) {
         try {
-            menu.remove(rm);
+            Food newFood = searchMenu(rm);
+            menu.remove(newFood);
 
         } catch (UnknownError e){
             System.out.println("Could not remove");
@@ -184,4 +217,3 @@ public class Menu extends Stage {
         customer = newCustomer;
     }
 }
-

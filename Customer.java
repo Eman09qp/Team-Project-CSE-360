@@ -59,6 +59,10 @@ public class Customer extends User {
         cart.add(newFood);
     }
 
+    public void removeCart(Food newFood) {
+        cart.remove(newFood);
+    }
+
     public boolean isFrequentCustomer() {
         return frequent;
     }

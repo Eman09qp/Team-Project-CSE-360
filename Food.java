@@ -4,12 +4,14 @@ public class Food {
     private String foodType = "";
     private String ingredients = "";
     private double price = 0.0;
+    private String image = "";
     
-    public Food(String newFoodName, String newFoodType, String newIngredients, double newPrice){
+    public Food(String newFoodName, String newFoodType, String newIngredients, double newPrice, String newImage){
         foodName = newFoodName;
         foodType = newFoodType;
         ingredients = newIngredients;
         price = newPrice;
+        image = newImage;
     }
 
     //Getters and Setters
@@ -51,5 +53,9 @@ public class Food {
                 "\nFood Type\t\t\t" + foodType +
                 "\nIngredients:\t\t\t" + ingredients +
                 "\nPrice:\t\t\t" + price;
+    }
+
+    public String getImage() {
+        return image;
     }
 }
